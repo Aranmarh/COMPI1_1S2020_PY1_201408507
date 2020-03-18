@@ -40,6 +40,7 @@
             this.guardarTokensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarErroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.analizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +104,8 @@
             this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cargarThomsonToolStripMenuItem,
             this.guardarTokensToolStripMenuItem,
-            this.guardarErroresToolStripMenuItem});
+            this.guardarErroresToolStripMenuItem,
+            this.analizarToolStripMenuItem});
             this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
             this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.herramientasToolStripMenuItem.Text = "Herramientas";
@@ -111,19 +113,19 @@
             // cargarThomsonToolStripMenuItem
             // 
             this.cargarThomsonToolStripMenuItem.Name = "cargarThomsonToolStripMenuItem";
-            this.cargarThomsonToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cargarThomsonToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cargarThomsonToolStripMenuItem.Text = "Cargar thomson";
             // 
             // guardarTokensToolStripMenuItem
             // 
             this.guardarTokensToolStripMenuItem.Name = "guardarTokensToolStripMenuItem";
-            this.guardarTokensToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.guardarTokensToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guardarTokensToolStripMenuItem.Text = "Guardar Tokens";
             // 
             // guardarErroresToolStripMenuItem
             // 
             this.guardarErroresToolStripMenuItem.Name = "guardarErroresToolStripMenuItem";
-            this.guardarErroresToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.guardarErroresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guardarErroresToolStripMenuItem.Text = "Guardar Errores";
             // 
             // menuStrip1
@@ -138,6 +140,13 @@
             this.menuStrip1.Size = new System.Drawing.Size(1034, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // analizarToolStripMenuItem
+            // 
+            this.analizarToolStripMenuItem.Name = "analizarToolStripMenuItem";
+            this.analizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.analizarToolStripMenuItem.Text = "Analizar";
+            this.analizarToolStripMenuItem.Click += new System.EventHandler(this.analizarToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -172,6 +181,7 @@
         private System.Windows.Forms.ToolStripMenuItem guardarTokensToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarErroresToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem analizarToolStripMenuItem;
     }
 }
 
