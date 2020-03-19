@@ -15,12 +15,19 @@ namespace Proyecto1
     public partial class Form1 : Form
     {
         ArrayList ListaPestaña = new ArrayList();
-        ArrayList token = new ArrayList();
+        List<Token> token = new List<Token>();
+        List<Error> ErrorT = new List<Error>();
+        List<Conjunto> conj = new List<Conjunto>();
+        List<validaciones> validacion = new List<validaciones>();
+        List<Expresion> exp = new List<Expresion>();
         int pestaña = 0;
         string root = "";
         int id = 0;
-        Token t1 = new Token(1, "hola", 2, "name");
-        
+
+
+        bool c, e, v = false;
+
+
 
         public Form1()
         {
@@ -32,7 +39,7 @@ namespace Proyecto1
         private void agregarPestañaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             nuevaPestaña("nueva Pestaña" + pestaña);
-            
+
         }
 
         private TextBox Crear()
@@ -54,17 +61,17 @@ namespace Proyecto1
             pestaña++;
             tabControl1.SelectedTab = nueva;
 
-            
+
 
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog Open = new OpenFileDialog();
-            
+
             if (Open.ShowDialog() == DialogResult.OK) {
                 root = Open.FileName;
-                AbrirLectura(Open.SafeFileName,leer(root));
+                AbrirLectura(Open.SafeFileName, leer(root));
             }
         }
 
@@ -75,7 +82,7 @@ namespace Proyecto1
             return texto;
         }
 
-        private void AbrirLectura(string nombre,string texto) {
+        private void AbrirLectura(string nombre, string texto) {
 
             TabPage nueva = new TabPage(nombre);
             TextBox T = Crear();
@@ -85,17 +92,17 @@ namespace Proyecto1
             tabControl1.TabPages.Add(nueva);
             pestaña++;
             tabControl1.SelectedTab = nueva;
-            
+
 
         }
 
 
         private String guardar() {
-            
+
             int selectedTab = tabControl1.SelectedIndex;
             Control ctrl = tabControl1.Controls[selectedTab].Controls[0];
             TextBox rtb = ctrl as TextBox;
-            string guardar= rtb.Text;
+            string guardar = rtb.Text;
             return guardar;
 
 
@@ -104,9 +111,9 @@ namespace Proyecto1
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             SaveFileDialog guardo = new SaveFileDialog();
-           // guardo.Filter=".txt";
+            // guardo.Filter=".txt";
             guardo.Title = tabControl1.SelectedTab.Text;
             var resultado = guardo.ShowDialog();
             if (resultado == DialogResult.OK) {
@@ -114,12 +121,21 @@ namespace Proyecto1
                 escribir.Write(guardar());
                 escribir.Close();
             }
-            
+
         }
 
         private void analizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Analizar(guardar());
+            /* foreach (var item in token)
+             {
+                 Console.WriteLine(item.mostrar());
+             }
 
+             Console.WriteLine(token.Count);*/
+
+            obtenerExpresiones();
+           mostrar();
         }
 
 
@@ -130,7 +146,7 @@ namespace Proyecto1
             for (int i = 0; i < entrada.Length; i++)
             {
                 c = entrada[i];
-                Console.WriteLine(c);
+                // Console.WriteLine(c);
 
                 switch (estado)
                 {
@@ -150,7 +166,7 @@ namespace Proyecto1
                         { //identificador
                             estado = 6;
                             lexema += c;
-                        }else if (c == '-')
+                        } else if (c == '-')
                         { //asignacion
                             estado = 7;
                             lexema += c;
@@ -160,115 +176,115 @@ namespace Proyecto1
                         { //cadena
                             estado = 8;
                             lexema += c;
-                            //  System.out.println("ingreso a 8");
+                            
                         }
                         else if (Char.IsDigit(c))
                         {//digito
                             estado = 9;
                             lexema += c;
-                            // System.out.println("ingreso a 9");
+                           
 
                         }
                         else if (c == '.')
                         {//concatenacion
                             lexema += c;
-                            token.Add(new Token(id, lexema, 1, "concatenacion"));
+                            token.Add(new Token(id, lexema, 5, 1, "concatenacion"));
                             id++;
                             lexema = "";
-                            //  System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == '|')
                         {//disyuncion
                             lexema += c;
-                            token.Add(new Token(id, lexema, 1, "disyuncion"));
+                            token.Add(new Token(id, lexema, 5, 1, "disyuncion"));
                             id++;
                             lexema = "";
-                            //  System.out.println("aceptacion 0");
+                           
                         }
                         else if (c == '?')
                         { //cerradura
                             lexema += c;
-                            token.Add(new Token(id, lexema, 2, "cerradura"));
+                            token.Add(new Token(id, lexema, 5, 2, "cerradura"));
                             id++;
                             lexema = "";
-                            //  System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == '*')
                         { // 0 o mas
                             lexema += c;
-                            token.Add(new Token(id, lexema, 2, "0 o mas"));
+                            token.Add(new Token(id, lexema, 5, 2, "0 o mas"));
                             id++;
                             lexema = "";
-                            // System.out.println("aceptacion 0");
+                           
                         }
                         else if (c == '+')
                         { //1 o mas
                             lexema += c;
-                            token.Add(new Token(id, lexema, 2, "1 o mas"));
+                            token.Add(new Token(id, lexema, 5, 2, "1 o mas"));
                             id++;
                             lexema = "";
-                            // System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == ';')
                         {//punto coma
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "PC"));
+                            token.Add(new Token(id, lexema, 6, 0, "PC"));
                             id++;
                             lexema = "";
-                            // System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == ',')
                         {// coma
                             lexema += c;
-                            token.Add(new Token(id, lexema,  0, "C"));
+                            token.Add(new Token(id, lexema, 12, 0, "C"));
                             id++;
                             lexema = "";
-                            //System.out.println("aceptacion 0");
+                           
                         }
                         else if (c == '{')
                         { //llA
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "LLA"));
+                            token.Add(new Token(id, lexema, 6, 0, "LLA"));
                             id++;
                             lexema = "";
-                            // System.out.println("aceptacion 0");
+                           
                         }
                         else if (c == '}')
                         { //llC
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "LLC"));
+                            token.Add(new Token(id, lexema, 6, 0, "LLC"));
                             id++;
                             lexema = "";
-                            // System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == '%')
                         {//porcentaje
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "P"));
+                            token.Add(new Token(id, lexema, 6, 0, "P"));
                             id++;
                             lexema = "";
-                            //System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == '~')
                         {//porcentaje
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "range"));
+                            token.Add(new Token(id, lexema, 11, 0, "range"));
                             id++;
                             lexema = "";
-                            // System.out.println("aceptacion 0");
+                            
                         }
                         else if (c == ':')
                         {//dos puntos
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "dos Puntos"));
+                            token.Add(new Token(id, lexema, 10, 0, "dos Puntos"));
                             id++;
                             lexema = "";
-                            //System.out.println("aceptacion 0");
+                           
                         }
                         else if (c == ' ' || c == '\n' || c == '\t')
                         {
                             estado = 0;
-                            //  System.out.println("salto o espacio");
+                           
 
                         }
                         else
@@ -313,7 +329,7 @@ namespace Proyecto1
                         if (c == '>')
                         {
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "comentario multiple"));
+                            token.Add(new Token(id, lexema, 1, 0, "comentario multiple"));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -329,7 +345,7 @@ namespace Proyecto1
                         {
                             estado = 5;
                             lexema += c;
-                            //System.out.println("entro a 5");
+                          
 
 
                         }
@@ -348,11 +364,11 @@ namespace Proyecto1
                         else
                         {
                             //lexema+=c;
-                            token.Add(new Token(id, lexema, 0, "Comentario S"));
+                            token.Add(new Token(id, lexema, 2, 0, "Comentario S"));
                             id++;
                             lexema = "";
                             estado = 0;
-                           
+
                             i--;
                         }
                         break;
@@ -367,7 +383,7 @@ namespace Proyecto1
                         {
                             if (lexema.Equals("CONJ"))
                             {
-                                token.Add(new Token(id, lexema, 0, "conjunto"));
+                                token.Add(new Token(id, lexema, 7, 0, "conjunto"));
                                 id++;
                                 lexema = "";
                                 estado = 0;
@@ -375,7 +391,7 @@ namespace Proyecto1
                             }
                             else
                             {
-                                token.Add(new Token(id, lexema, 0, "variable"));
+                                token.Add(new Token(id, lexema, 3, 0, "variable"));
                                 id++;
                                 lexema = "";
                                 estado = 0;
@@ -387,7 +403,7 @@ namespace Proyecto1
                         if (c == '>')
                         {
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "asignacion"));
+                            token.Add(new Token(id, lexema, 4, 0, "asignacion"));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -395,7 +411,7 @@ namespace Proyecto1
                         }
                         else
                         {
-                            token.Add(new Token(id, lexema, 0, "guion"));
+                            token.Add(new Token(id, lexema, 6, 0, "guion"));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -412,7 +428,7 @@ namespace Proyecto1
                         else
                         {
                             lexema += c;
-                            token.Add(new Token(id, lexema, 0, "cadena"));
+                            token.Add(new Token(id, lexema, 8, 0, "cadena"));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -429,7 +445,7 @@ namespace Proyecto1
                         }
                         else
                         {
-                            token.Add(new Token(id, lexema, 0, "Digito"));
+                            token.Add(new Token(id, lexema, 9, 0, "Digito"));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -440,6 +456,81 @@ namespace Proyecto1
                 }
             }
         }
-    }
-}
 
+        public void obtenerExpresiones() {
+            int x = 1;
+            int y = 1;
+            int z = 1;
+
+
+            for (int i = 0; i < token.Count; i++)
+            {
+
+                //definicion
+                if (token[i].Tipo == 7 && token[i + 1].Tipo == 10)
+                {
+                    conj.Add(new Conjunto(x, token[i + 2].Lexema));
+                    x++;
+                    i = i + 3;
+                    c = true;
+                    e = false; v = false;
+                }
+
+                if ((token[i].Tipo == 3 || token[i].Tipo == 11 || token[i].Tipo == 9 || token[i].Tipo == 12) && c == true)
+                {
+                    conj[conj.Count - 1].Con.Add(token[i].Lexema);
+                }
+                ////expresion
+                if (token[i].Tipo == 3 && token[i + 1].Tipo == 4)
+                {
+                    
+                    exp.Add(new Expresion(y, token[i].Lexema));
+                    y++;
+                    i = i + 1;
+                    c = false; e = true; v = false;
+                   
+                }
+                if ((token[i].Tipo == 3 || token[i].Tipo == 5 || token[i].Tipo == 8) && e == true)
+                {
+                    exp[exp.Count - 1].Token.Add(token[i]);
+                }
+
+                // definicion cadena
+                if (token[i].Tipo == 3 && token[i+1].Tipo == 10)
+                {
+                   
+                    validacion.Add(new validaciones(z, token[i].Lexema, token[i + 2].Lexema));
+                    z++;
+                    i = i + 1;
+                    c = false; v = true; e = false;
+
+                }
+
+            }
+        }
+
+
+            public void mostrar() {
+                Console.WriteLine("-----------------------------------------CONJUNTOS--------------------------------");
+
+                foreach (var item in conj)
+                {
+                    Console.WriteLine(item.Id + "  name: " + item.Nombre);
+                    item.mostrarTokens();
+                }
+                Console.WriteLine("-----------------------------------------EXPRECIONES--------------------------------");
+                foreach (var item in exp)
+                {
+                    Console.WriteLine(item.Name);
+                    item.mostrarTokens();
+                }
+                Console.WriteLine("-----------------------------------------VALIDACIONES--------------------------------");
+                foreach (var item in validacion)
+                {
+                    Console.WriteLine(item.Id + " nombre: " + item.Nombre +" Cadena:"+item.Cadena);
+                }
+            }
+
+        }
+    
+}

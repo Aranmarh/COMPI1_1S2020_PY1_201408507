@@ -8,3 +8,13 @@ C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\Proyecto
 C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.csproj.CoreCompileInputs.cache
 C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.exe
 C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.pdb
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\bin\Debug\Proyecto1.exe.config
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\bin\Debug\Proyecto1.exe
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\bin\Debug\Proyecto1.pdb
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.csprojAssemblyReference.cache
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.Form1.resources
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.Properties.Resources.resources
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.csproj.GenerateResource.cache
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.csproj.CoreCompileInputs.cache
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.exe
+C:\Users\Aran el prrron\Desktop\Clases\Compiladores\201408507_Proyecto1\COMPI1_1S2020_PY1_201408507\Proyecto1\Proyecto1\obj\Debug\Proyecto1.pdb
