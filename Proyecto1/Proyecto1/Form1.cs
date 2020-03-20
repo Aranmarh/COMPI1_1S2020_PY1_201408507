@@ -23,6 +23,7 @@ namespace Proyecto1
         int pestaña = 0;
         string root = "";
         int id = 0;
+        int ide = 0;
 
 
         bool c, e, v = false;
@@ -135,7 +136,10 @@ namespace Proyecto1
              Console.WriteLine(token.Count);*/
 
             obtenerExpresiones();
-           mostrar();
+            //mostrar();
+            //Console.WriteLine(ArchivoToken());
+            EscribirArchivo("Token", ArchivoToken());
+            EscribirArchivo("Error", ArchivoError());
         }
 
 
@@ -143,6 +147,8 @@ namespace Proyecto1
             int estado = 0;
             string lexema = "";
             char c;
+            int fila = 1;
+            int columna = 1;
             for (int i = 0; i < entrada.Length; i++)
             {
                 c = entrada[i];
@@ -154,13 +160,13 @@ namespace Proyecto1
                         if (c == '<')
                         {
                             estado = 1;
-                            lexema += c;
+                            //lexema += c;
 
                         }
                         else if (c == '/')
                         {
                             estado = 4;
-                            lexema += c;
+                            //lexema += c;
                         }
                         else if (Char.IsLetter(c))
                         { //identificador
@@ -176,121 +182,127 @@ namespace Proyecto1
                         { //cadena
                             estado = 8;
                             lexema += c;
-                            
+
                         }
                         else if (Char.IsDigit(c))
                         {//digito
                             estado = 9;
                             lexema += c;
-                           
+
 
                         }
                         else if (c == '.')
                         {//concatenacion
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 1, "concatenacion"));
+                            token.Add(new Token(id, lexema, 5, 1, "concatenacion", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == '|')
                         {//disyuncion
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 1, "disyuncion"));
+                            token.Add(new Token(id, lexema, 5, 1, "disyuncion",fila, columna));
                             id++;
                             lexema = "";
-                           
+
                         }
                         else if (c == '?')
                         { //cerradura
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 2, "cerradura"));
+                            token.Add(new Token(id, lexema, 5, 2, "cerradura", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == '*')
                         { // 0 o mas
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 2, "0 o mas"));
+                            token.Add(new Token(id, lexema, 5, 2, "0 o mas", fila, columna));
                             id++;
                             lexema = "";
-                           
+
                         }
                         else if (c == '+')
                         { //1 o mas
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 2, "1 o mas"));
+                            token.Add(new Token(id, lexema, 5, 2, "1 o mas", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == ';')
                         {//punto coma
                             lexema += c;
-                            token.Add(new Token(id, lexema, 6, 0, "PC"));
+                            token.Add(new Token(id, lexema, 6, 0, "PC", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == ',')
                         {// coma
                             lexema += c;
-                            token.Add(new Token(id, lexema, 12, 0, "C"));
+                            token.Add(new Token(id, lexema, 12, 0, "C", fila, columna));
                             id++;
                             lexema = "";
-                           
+
                         }
                         else if (c == '{')
                         { //llA
                             lexema += c;
-                            token.Add(new Token(id, lexema, 6, 0, "LLA"));
+                            token.Add(new Token(id, lexema, 6, 0, "LLA", fila, columna));
                             id++;
                             lexema = "";
-                           
+
                         }
                         else if (c == '}')
                         { //llC
                             lexema += c;
-                            token.Add(new Token(id, lexema, 6, 0, "LLC"));
+                            token.Add(new Token(id, lexema, 6, 0, "LLC", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == '%')
                         {//porcentaje
                             lexema += c;
-                            token.Add(new Token(id, lexema, 6, 0, "P"));
+                            token.Add(new Token(id, lexema, 6, 0, "P", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == '~')
                         {//porcentaje
                             lexema += c;
-                            token.Add(new Token(id, lexema, 11, 0, "range"));
+                            token.Add(new Token(id, lexema, 11, 0, "range", fila, columna));
                             id++;
                             lexema = "";
-                            
+
                         }
                         else if (c == ':')
                         {//dos puntos
                             lexema += c;
-                            token.Add(new Token(id, lexema, 10, 0, "dos Puntos"));
+                            token.Add(new Token(id, lexema, 10, 0, "dos Puntos", fila, columna));
                             id++;
                             lexema = "";
-                           
+
                         }
-                        else if (c == ' ' || c == '\n' || c == '\t')
+                        else if (c == ' ' || c == '\t')
                         {
                             estado = 0;
-                           
+                            columna ++;
 
+
+                        } else if ( c == '\n') {
+                            fila++;
+                            columna = 1;
                         }
                         else
                         {
 
                             estado = 0;
+                            ErrorT.Add(new Error(ide, lexema, "no se encuentra en la gramatica", fila, columna));
+                            ide++;
                             lexema = "";
                             // System.out.println("error");
                         }
@@ -300,7 +312,7 @@ namespace Proyecto1
                         if (c == '!')
                         {
                             estado = 2;
-                            lexema += c;
+                           // lexema += c;
 
                         }
                         else
@@ -313,8 +325,11 @@ namespace Proyecto1
                         if (c != '!')
                         {
                             estado = 2;
-                            if (c != '\n' || c != ' ' || c != '\t')
+                            if (c == '\n' || c == '\t')
                             {
+
+                            }
+                            else {
                                 lexema += c;
                             }
 
@@ -322,14 +337,14 @@ namespace Proyecto1
                         else
                         {
                             estado = 3;
-                            lexema += c;
+                           // lexema += c;
                         }
                         break;
                     case 3:
                         if (c == '>')
                         {
-                            lexema += c;
-                            token.Add(new Token(id, lexema, 1, 0, "comentario multiple"));
+                            //lexema += c;
+                            token.Add(new Token(id, lexema, 1, 0, "comentario multiple", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -337,6 +352,8 @@ namespace Proyecto1
                         else
                         {
                             estado = 0;
+                            ErrorT.Add(new Error(ide, lexema, "comentario multiple con error", fila, columna));
+                            ide++;
                             lexema = "";
                         }
                         break;
@@ -344,7 +361,7 @@ namespace Proyecto1
                         if (c == '/')
                         {
                             estado = 5;
-                            lexema += c;
+                           // lexema += c;
                           
 
 
@@ -364,7 +381,7 @@ namespace Proyecto1
                         else
                         {
                             //lexema+=c;
-                            token.Add(new Token(id, lexema, 2, 0, "Comentario S"));
+                            token.Add(new Token(id, lexema, 2, 0, "Comentario S", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -383,7 +400,7 @@ namespace Proyecto1
                         {
                             if (lexema.Equals("CONJ"))
                             {
-                                token.Add(new Token(id, lexema, 7, 0, "conjunto"));
+                                token.Add(new Token(id, lexema, 7, 0, "conjunto", fila, columna));
                                 id++;
                                 lexema = "";
                                 estado = 0;
@@ -391,7 +408,7 @@ namespace Proyecto1
                             }
                             else
                             {
-                                token.Add(new Token(id, lexema, 3, 0, "variable"));
+                                token.Add(new Token(id, lexema, 3, 0, "variable", fila, columna));
                                 id++;
                                 lexema = "";
                                 estado = 0;
@@ -403,7 +420,7 @@ namespace Proyecto1
                         if (c == '>')
                         {
                             lexema += c;
-                            token.Add(new Token(id, lexema, 4, 0, "asignacion"));
+                            token.Add(new Token(id, lexema, 4, 0, "asignacion", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -411,7 +428,7 @@ namespace Proyecto1
                         }
                         else
                         {
-                            token.Add(new Token(id, lexema, 6, 0, "guion"));
+                            token.Add(new Token(id, lexema, 6, 0, "guion", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -427,8 +444,8 @@ namespace Proyecto1
                         }
                         else
                         {
-                            lexema += c;
-                            token.Add(new Token(id, lexema, 8, 0, "cadena"));
+                            //lexema += c;
+                            token.Add(new Token(id, lexema, 8, 0, "cadena", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -445,7 +462,7 @@ namespace Proyecto1
                         }
                         else
                         {
-                            token.Add(new Token(id, lexema, 9, 0, "Digito"));
+                            token.Add(new Token(id, lexema, 9, 0, "Digito", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -510,7 +527,7 @@ namespace Proyecto1
         }
 
 
-            public void mostrar() {
+        public void mostrar() {
                 Console.WriteLine("-----------------------------------------CONJUNTOS--------------------------------");
 
                 foreach (var item in conj)
@@ -531,6 +548,57 @@ namespace Proyecto1
                 }
             }
 
+
+        public void EscribirArchivo(string titulo, string mensaje) {
+
+            TextWriter archivo;
+            archivo = new StreamWriter(titulo+".xml");
+            archivo.WriteLine(mensaje);
+            archivo.Close();
+            
         }
+
+        public string ArchivoToken() {
+            string Archivo = "<ListaTokens>\n";
+            foreach (var item in token)
+            {
+                Archivo += "\t<Token> \n\t\t";
+                Archivo += "\t<Nombre>" + item.Lexema+ "</Nombre>\n\t\t";
+                Archivo += "\t<Valor>" + item.Name + "</Valor>\n\t\t";
+                Archivo += "\t<Fila>" + item.Fila + "</Fila>\n\t\t";
+                Archivo += "\t<Columna>" + item.Columna + "</Columna>\n";
+                Archivo += "\t</Token>\n";
+
+            }
+
+
+            Archivo += "\n</ListaTokens>";
+
+            return Archivo;
+
+        }
+
+        public string ArchivoError()
+        {
+            string Archivo = "<ListaError> \n";
+            foreach (var item in ErrorT)
+            {
+                Archivo += "\t<Error> \n\t\t";
+                Archivo += "\t<Nombre>" + item.Erro + "</Nombre>\n\t\t";
+                Archivo += "\t<Valor>" + item.Tipo + "</Valor>\n\t\t";
+                Archivo += "\t<Fila>" + item.Fila + "</Fila>\n\t\t";
+                Archivo += "\t<Columna>" + item.Columna + "</Columna>\n";
+                Archivo += "\t</Error>\n";
+
+            }
+
+
+            Archivo += "\n </ListaError>";
+
+            return Archivo;
+
+        }
+
+    }
     
 }

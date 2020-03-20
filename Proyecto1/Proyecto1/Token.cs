@@ -13,14 +13,17 @@ namespace Proyecto1
         int tipo;
         int logico;
         string name;
+        int fila, columna;
 
-        public Token(int id, string lexema,  int tipo, int logico, string name)
+        public Token(int id, string lexema,  int tipo, int logico, string name,int fila, int columna)
         {
             this.Id = id;
             this.Lexema = lexema;
             this.Tipo = tipo;
             this.logico = logico;
             this.Name = name;
+            this.fila = fila;
+            this.columna = columna;
         }
 
 
@@ -36,6 +39,8 @@ namespace Proyecto1
         public int Id { get; set; }
 
         public int Logico { get => logico; set => logico = value; }
+        public int Fila { get => fila; set => fila = value; }
+        public int Columna { get => columna; set => columna = value; }
 
         public string mostrar() {
 
