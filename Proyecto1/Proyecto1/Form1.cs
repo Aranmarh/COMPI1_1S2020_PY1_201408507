@@ -20,6 +20,7 @@ namespace Proyecto1
         List<Conjunto> conj = new List<Conjunto>();
         List<validaciones> validacion = new List<validaciones>();
         List<Expresion> exp = new List<Expresion>();
+        Lista list = new Lista();
         int pestaña = 0;
         string root = "";
         int id = 0;
@@ -128,18 +129,23 @@ namespace Proyecto1
         private void analizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analizar(guardar());
-            /* foreach (var item in token)
-             {
-                 Console.WriteLine(item.mostrar());
-             }
-
-             Console.WriteLine(token.Count);*/
+           
 
             obtenerExpresiones();
-            //mostrar();
-            //Console.WriteLine(ArchivoToken());
-            EscribirArchivo("Token", ArchivoToken());
-            EscribirArchivo("Error", ArchivoError());
+            mostrar();
+            EscribirArchivo("Token",ArchivoToken());
+
+            Console.WriteLine("   ------------------------------------------------");
+            exp[1].L.recorrerLista();
+
+            Console.WriteLine("   ------------------------ARBOL------------------------");
+            exp[1].L.arbol();
+
+            Console.WriteLine("   ------------------------lISTA------------------------");
+            Console.Write("Nombre:" + exp[0].Name); exp[0].L.recorrerLista();
+
+        
+
         }
 
 
@@ -181,7 +187,7 @@ namespace Proyecto1
                         else if (c == '\"')
                         { //cadena
                             estado = 8;
-                            lexema += c;
+                           // lexema += c;
 
                         }
                         else if (Char.IsDigit(c))
@@ -194,7 +200,7 @@ namespace Proyecto1
                         else if (c == '.')
                         {//concatenacion
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 1, "concatenacion", fila, columna));
+                            token.Add(new Token(id, lexema, 5, 3, "concatenacion", fila, columna));
                             id++;
                             lexema = "";
 
@@ -202,7 +208,7 @@ namespace Proyecto1
                         else if (c == '|')
                         {//disyuncion
                             lexema += c;
-                            token.Add(new Token(id, lexema, 5, 1, "disyuncion",fila, columna));
+                            token.Add(new Token(id, lexema, 5, 3, "disyuncion",fila, columna));
                             id++;
                             lexema = "";
 
@@ -344,6 +350,7 @@ namespace Proyecto1
                         if (c == '>')
                         {
                             //lexema += c;
+                            lexema.Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
                             token.Add(new Token(id, lexema, 1, 0, "comentario multiple", fila, columna));
                             id++;
                             lexema = "";
@@ -352,6 +359,7 @@ namespace Proyecto1
                         else
                         {
                             estado = 0;
+                            lexema.Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
                             ErrorT.Add(new Error(ide, lexema, "comentario multiple con error", fila, columna));
                             ide++;
                             lexema = "";
@@ -381,6 +389,7 @@ namespace Proyecto1
                         else
                         {
                             //lexema+=c;
+                            lexema.Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
                             token.Add(new Token(id, lexema, 2, 0, "Comentario S", fila, columna));
                             id++;
                             lexema = "";
@@ -408,7 +417,8 @@ namespace Proyecto1
                             }
                             else
                             {
-                                token.Add(new Token(id, lexema, 3, 0, "variable", fila, columna));
+                                lexema.Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
+                                token.Add(new Token(id, lexema, 3, 1, "variable", fila, columna));
                                 id++;
                                 lexema = "";
                                 estado = 0;
@@ -445,7 +455,8 @@ namespace Proyecto1
                         else
                         {
                             //lexema += c;
-                            token.Add(new Token(id, lexema, 8, 0, "cadena", fila, columna));
+                            lexema.Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
+                            token.Add(new Token(id, lexema, 8, 1, "cadena", fila, columna));
                             id++;
                             lexema = "";
                             estado = 0;
@@ -510,6 +521,7 @@ namespace Proyecto1
                 if ((token[i].Tipo == 3 || token[i].Tipo == 5 || token[i].Tipo == 8) && e == true)
                 {
                     exp[exp.Count - 1].Token.Add(token[i]);
+                    exp[exp.Count - 1].L.insertar(token[i].Lexema,token[i].Logico, token[i].Tipo);
                 }
 
                 // definicion cadena
@@ -524,6 +536,15 @@ namespace Proyecto1
                 }
 
             }
+            int k = conj.Count - 1;
+            int j = exp.Count - 1;
+            var it = conj[k].Con[conj[k].Con.Count - 1];
+
+            conj[k].Con.Remove(it);
+            exp[j].L.eliminarUltimo();
+            
+            
+
         }
 
 
@@ -539,7 +560,8 @@ namespace Proyecto1
                 foreach (var item in exp)
                 {
                     Console.WriteLine(item.Name);
-                    item.mostrarTokens();
+                // item.mostrarTokens();
+                    item.L.recorrerLista();
                 }
                 Console.WriteLine("-----------------------------------------VALIDACIONES--------------------------------");
                 foreach (var item in validacion)
@@ -558,6 +580,13 @@ namespace Proyecto1
             
         }
 
+        private void cargarThomsonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+
+        //archivos............................
         public string ArchivoToken() {
             string Archivo = "<ListaTokens>\n";
             foreach (var item in token)

@@ -11,6 +11,7 @@ namespace Proyecto1
         int id;
         string name;
         List<Token> t = new List<Token>();
+        Lista l = new Lista();
 
         public Expresion(int id, string name)
         {
@@ -22,6 +23,7 @@ namespace Proyecto1
         public int Id { get => id; set => id = value; }
         public List<Token> Token { get => t; set => t= value; }
         public string Name { get => name; set => name = value; }
+        internal Lista L { get => l; set => l = value; }
 
         public void mostrarTokens() {
             foreach (var item in t)

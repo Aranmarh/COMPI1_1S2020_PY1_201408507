@@ -39,17 +39,18 @@
             this.cargarThomsonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarTokensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarErroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.analizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
+            this.tabControl1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 50);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(530, 253);
+            this.tabControl1.Size = new System.Drawing.Size(642, 253);
             this.tabControl1.TabIndex = 1;
             // 
             // textBox1
@@ -57,14 +58,14 @@
             this.textBox1.Location = new System.Drawing.Point(12, 320);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(522, 135);
+            this.textBox1.Size = new System.Drawing.Size(642, 135);
             this.textBox1.TabIndex = 2;
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel1.Location = new System.Drawing.Point(577, 72);
+            this.panel1.Location = new System.Drawing.Point(706, 72);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(428, 195);
             this.panel1.TabIndex = 3;
@@ -73,7 +74,7 @@
             // 
             this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel2.Location = new System.Drawing.Point(577, 285);
+            this.panel2.Location = new System.Drawing.Point(706, 300);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(428, 180);
             this.panel2.TabIndex = 4;
@@ -115,6 +116,7 @@
             this.cargarThomsonToolStripMenuItem.Name = "cargarThomsonToolStripMenuItem";
             this.cargarThomsonToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cargarThomsonToolStripMenuItem.Text = "Cargar thomson";
+            this.cargarThomsonToolStripMenuItem.Click += new System.EventHandler(this.cargarThomsonToolStripMenuItem_Click);
             // 
             // guardarTokensToolStripMenuItem
             // 
@@ -128,6 +130,13 @@
             this.guardarErroresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guardarErroresToolStripMenuItem.Text = "Guardar Errores";
             // 
+            // analizarToolStripMenuItem
+            // 
+            this.analizarToolStripMenuItem.Name = "analizarToolStripMenuItem";
+            this.analizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.analizarToolStripMenuItem.Text = "Analizar";
+            this.analizarToolStripMenuItem.Click += new System.EventHandler(this.analizarToolStripMenuItem_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -137,22 +146,15 @@
             this.herramientasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1034, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1197, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // analizarToolStripMenuItem
-            // 
-            this.analizarToolStripMenuItem.Name = "analizarToolStripMenuItem";
-            this.analizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.analizarToolStripMenuItem.Text = "Analizar";
-            this.analizarToolStripMenuItem.Click += new System.EventHandler(this.analizarToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 511);
+            this.ClientSize = new System.Drawing.Size(1197, 511);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
