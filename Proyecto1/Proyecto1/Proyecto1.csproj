@@ -57,8 +57,10 @@
     </Compile>
     <Compile Include="Lista.cs" />
     <Compile Include="nodo.cs" />
+    <Compile Include="nodoM.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="thompsom.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="validaciones.cs" />
     <EmbeddedResource Include="Form1.resx">

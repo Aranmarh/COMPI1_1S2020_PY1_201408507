@@ -15,6 +15,7 @@ namespace Proyecto1
         nodo siguiente;
         nodo derecha;
         nodo izquierda;
+        nodo u;
 
         public nodo(int id, string lexema, int tipo, int logico)
         {
@@ -25,6 +26,7 @@ namespace Proyecto1
             this.siguiente = null;
             this.derecha = null;
             this.izquierda = null;
+            this.u = null;
         }
 
         public int Id { get => id; set => id = value; }
@@ -34,5 +36,6 @@ namespace Proyecto1
         internal nodo Siguiente { get => siguiente; set => siguiente = value; }
         internal nodo Derecha { get => derecha; set => derecha = value; }
         internal nodo Izquierda { get => izquierda; set => izquierda = value; }
+        internal nodo U { get => u; set => u = value; }
     }
 }
